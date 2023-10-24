@@ -13,4 +13,35 @@
         .openPopup();
 
 
+
+        // an asynchronous function to update bus data
+        async function update_bus_data()
+        {
+            var raw_data = await fetch("https://prog2700.onrender.com/hrmbuses");
+            var data = await raw_data.json();
+            var selected_routes = data.entity.filter((x) => x.vehicle.trip.routeId <= 10);
+
+            map.eachLayer(function (layer) 
+            {
+                if (layer instanceof L.Marker) 
+                {
+                    map.removeLayer(layer);
+                }
+            });
+
+            selected_routes.map((route) =>
+            {
+                var geojsonFeature = 
+                {
+                    "type": "Feature",
+                    "properties":{},
+                    "geometry": 
+                    {
+                        "type": "Point",
+                        "coordinates": [route.vehicle.position.longitude, route.vehicle.position.latitude]
+                    }
+
+                }
+
+          
 })()
