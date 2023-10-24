@@ -29,6 +29,7 @@
                 }
             });
 
+            // Add markers for the selected bus routes with custom icons
             selected_routes.map((route) =>
             {
                 var geojsonFeature = 
@@ -43,5 +44,4 @@
 
                 }
 
-          
 })()
