@@ -13,17 +13,36 @@
     .then((json) => {
 
         //DO NOT MODIFY THE CODE IN HERE...check the console for your functions' output
-
+        console.log(json);
         //1 - Create a function called getGuntherCount() which returns the total number of episodes 
         // where the character Gunther is mentioned in the episode summary.
+
+        function getGuntherCount(obj)
+        {
+            return  obj._embedded.episodes.filter((episode) => episode.summary.includes('Gunther')).length;
+        }
+
         console.log('--------------------------------');
         console.log(`Gunther Count: ${getGuntherCount(json)}`);
 
         //2 - Create a function called getTotalRuntimeMinutes() that totals all runtime minutes for all episodes
+        
+        function getTotalRuntimeMinutes(obj)
+        {
+            return obj._embedded.episodes.reduce((total, episode) => total + episode.runtime,0);
+        }
+        
         console.log('--------------------------------');
         console.log(`Total Runtime Minutes: ${getTotalRuntimeMinutes(json)}`);
 
+
         //3 - Create a function called getDateRangeEpisodeCount() that returns the number of episodes that aired in the year 2000
+        
+        function getTotalEpisodesInYear(obj, year)
+        {
+            return obj._embedded.episodes.filter((episode) => episode.airdate.includes(year)).length;
+        }
+        
         console.log('--------------------------------');
         console.log(`Total episodes airing in year 2000: ${getTotalEpisodesInYear(json, "2000")}`);
 
