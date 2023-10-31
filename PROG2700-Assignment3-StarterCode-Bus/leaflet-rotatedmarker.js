@@ -7,6 +7,7 @@
 
     var oldIE = (L.DomUtil.TRANSFORM === 'msTransform');
 
+    // add marker with icon
     L.Marker.addInitHook(function () {
         var iconOptions = this.options.icon && this.options.icon.options;
         var iconAnchor = iconOptions && this.options.icon.options.iconAnchor;

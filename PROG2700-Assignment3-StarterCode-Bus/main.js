@@ -3,7 +3,8 @@
 
     //create map in leaflet and tie it to the div called 'theMap'
     let map = L.map('theMap').setView([44.650627, -63.597140], 14);
-
+    
+    // add a title layer map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -30,7 +31,8 @@
             });
 
             selected_routes.map((route) =>
-            {
+            {   
+                // create a GeoJSON feater for the bus location
                 var geojsonFeature = 
                 {
                     "type": "Feature",
@@ -42,7 +44,8 @@
                     }
 
                 }
-
+                
+                // define a custome icon for the marker
                 var custom_icon = L.icon({
                     iconUrl: 'bus.png',
                     // the icon is 100 * 102
@@ -50,16 +53,19 @@
                     iconAnchor: [25,25.5],
                     popupAnchor: [0,-25.5]
                     });
-
+                
+                // create a marker with the custome icon and add it to the map
                 L.geoJSON(geojsonFeature,{ pointToLayer: function(feature,latlng){return L.marker(latlng,{icon: custom_icon,rotationAngle:route.vehicle.position.bearing})}}).addTo(map).bindPopup("Vehicle ID : " + route.vehicle.vehicle.id + "<br>Route ID : " + route.vehicle.trip.routeId + "<br>Speed : " + route.vehicle.position.speed + "<br>Heading : " + route.vehicle.position.bearing);
                 return route;
             });
+            // log selected rout for debbuging
             console.log(selected_routes);
+            // wait for 10 seconds before calling function
             await new Promise(r => setTimeout(r, 10000));
             update_bus_data();
 
         }
-        
 
+        //initional call
         update_bus_data();
 })()
