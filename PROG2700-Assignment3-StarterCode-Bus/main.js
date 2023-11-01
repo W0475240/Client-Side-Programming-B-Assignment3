@@ -3,7 +3,7 @@
 
     //create map in leaflet and tie it to the div called 'theMap'
     let map = L.map('theMap').setView([44.650627, -63.597140], 14);
-    
+
     // add a title layer map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -14,6 +14,7 @@
         .openPopup();
 
 
+        
 
 
         async function update_bus_data()
